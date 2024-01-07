@@ -1,4 +1,4 @@
-# FunChat App
+# MQTT Project
 
 :heart: A product that implements MQTT protocol applications based on EMQX and Webserver :heart:
 
