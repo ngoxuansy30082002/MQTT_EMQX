@@ -1,0 +1,78 @@
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+}
+
+/* Style for the custom select */
+select.custom-select {
+  height: 37px;
+  padding: 0 48px;
+  font-size: 16px;
+  color: #5e72e4;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Style for the arrow icon */
+select.custom-select::after {
+  content: "\25BC"; /* Unicode character for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: white;
+}
+.list-turbine-item.active {
+  background-color: rgba(124, 124, 124, 0.13);
+}
+
+/////
+
+#switch[type="checkbox"] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+#sw-label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 40px;
+  height: 20px;
+  background: grey;
+  border-radius: 20px;
+  position: relative;
+}
+
+#sw-label:after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16.5px;
+  height: 16.5px;
+  background: #fff;
+  border-radius: 16.5px;
+  transition: 0.3s;
+}
+
+#switch:checked + #sw-label {
+  background: #bada55;
+}
+
+#switch:checked + #sw-label:after {
+  left: calc(100% - 1.5px);
+  transform: translateX(-100%);
+}
+
+#sw-label:active:after {
+  width: 26px;
+}
+
+// centering

@@ -1,0 +1,43 @@
+{
+  "name": "webserver",
+  "version": "1.0.0",
+  "description": "Webserver for MQTT project",
+  "main": "src/ndex.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lephamcong/IOT_Project_with_MQTT.git"
+  },
+  "author": "Syxn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lephamcong/IOT_Project_with_MQTT/issues"
+  },
+  "homepage": "https://github.com/lephamcong/IOT_Project_with_MQTT#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bootstrap": "^5.3.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "css": "^3.0.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
+    "mongoose": "^8.0.3",
+    "mqtt": "^5.3.4",
+    "nodemailer": "^6.9.7",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "node-sass": "^9.0.0",
+    "nodemon": "^3.0.1"
+  }
+}

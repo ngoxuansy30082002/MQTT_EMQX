@@ -1,0 +1,283 @@
+<!-- Sidenav -->
+{{>sidebar}}
+<!-- Main content -->
+<div class="main-content">
+    <!-- Top navbar -->
+    {{>navbar}}
+    <!-- Header -->
+    {{>header}}
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+        <div class="row">
+            <div class="col-xl-8 mb-5 mb-xl-0">
+                <div class="card bg-gradient-default shadow">
+                    <div class="card-header bg-transparent">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="text-uppercase text-light ls-1 mb-1">Overview</h6>
+                                <h2 class="dashboard-chart-title text-white mb-0">Temperature (℃)</h2>
+                            </div>
+                            <div class="col">
+                                <ul class="nav nav-pills justify-content-end">
+                                    <li class="nav-item mr-2 mr-md-0">
+                                        <select id="customSelect" class="custom-select">
+                                            {{#each allDatas}}
+                                            <option value="{{this.date}}">{{this.date}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </li>
+                                    <li class="nav-item mr-2 mr-md-0">
+                                        <a href="#" class="nav-link py-2 px-3 active" data-toggle="tab">
+                                            <span class="d-none d-md-block">Date</span>
+                                            <span class="d-md-none">D</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Chart -->
+                        <div class="chart">
+                            <!-- Chart wrapper -->
+                            <canvas id="chart-data" class="chart-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card shadow">
+                    <div class="card-header bg-transparent">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h6 class="text-uppercase text-muted ls-1 mb-1">Weekly Average</h6>
+                                <h2 class="dashboard-chart-title mb-0">Temperature (℃)</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Chart -->
+                        <div class="chart">
+                            <canvas id="chart-data-avg" class="chart-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-xl-8 mb-5 mb-xl-0">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h3 class="mb-0">Maintenance History</h3>
+                            </div>
+                            <div class="col text-right">
+                                <a href="#!" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#maintenanceModal">New plan</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Type </th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Responsible</th>
+                                    <th scope="col">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each maintenance}}
+                                <tr>
+                                    <th scope="row">
+                                        {{this.type}}
+                                    </th>
+                                    <td>
+                                        {{this.description}}
+                                    </td>
+                                    <td>
+                                        {{this.responsible}}
+                                    </td>
+                                    <td>
+                                        {{this.startDay}} <i class="fa-solid fa-arrow-right text-success m-1"></i>
+                                        {{this.endDay}}
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h3 class="mb-0">Turbine Specifications</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">
+                                        Installed Date
+                                    </th>
+                                    <td>
+                                        {{turbine.installed_date}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        Rated power
+                                    </th>
+                                    <td>
+                                        {{turbine.power}}kW
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        Address
+                                    </th>
+                                    <td>
+                                        {{turbine.location.address}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        Coordinates
+                                    </th>
+                                    <td>
+                                        {{turbine.location.coordinates.[0]}}Lng -
+                                        {{turbine.location.coordinates.[1]}}Lat
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        Status
+                                    </th>
+                                    {{!-- {{#if (compare turbine.operatingStatus "Active")}} --}}
+                                    <td class="d-flex  align-items-center">
+                                        <span id="dashboard-status"></span>
+                                        <input type="checkbox" id="switch" /><label class="mt-1 mb-1 ml-3" id="sw-label"
+                                            for="switch"></label>
+                                    </td>
+                                    {{!-- {{/if}} --}}
+                                    {{!-- {{#if (compare turbine.operatingStatus "Inactive")}}
+                                    <td class="d-flex  align-items-center" style="color: #BA2020;">
+                                        {{turbine.operatingStatus}}
+                                        <input type="checkbox" id="switch" /><label class="mt-1 mb-1 ml-3" id="sw-label"
+                                            for="switch"></label>
+                                    </td>
+                                    {{/if}}
+                                    {{#if (compare turbine.operatingStatus "Maintenance")}}
+                                    <td class="d-flex  align-items-center" style="color: #BABA20;">
+                                        {{turbine.operatingStatus}}
+                                    </td>
+                                    {{/if}} --}}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        {{>footer}}
+    </div>
+</div>
+
+
+<div class="modal fade" id="maintenanceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action='/maintenance/{{turbine._id}}' method="POST">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">MAINTENANCE PLAN</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>Type:</h5>
+                    <select name="type" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option value="Preventive" selected>Periodic Maintenance</option>
+                        <option value="Corrective">Corrective </option>
+                        <option value="Upgrade">Upgrade </option>
+                    </select>
+                    <div class="mb-3">
+                        <h5 style="margin-top: 10px;">Description:</h5>
+                        <input name="description" type="text" class="form-control" id="exampleFormControlInput1"
+                            placeholder="...">
+                    </div>
+                    <div class="mb-3">
+                        <h5 style="margin-top: 10px;">Responsible person:</h5>
+                        <input name="responsible" type="text" class="form-control" id="exampleFormControlInput1"
+                            placeholder="...">
+                    </div>
+                    <div class="mb-3">
+                        <h5 style="margin-top: 10px;">Start Day:</h5>
+                        <input name="startDay" type="date" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <h5 style="margin-top: 10px;">End Day:</h5>
+                        <input name="endDay" type="date" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Include scripts -->
+<script>
+    var allDatas = {{{ json allDatas }}};
+    const dates = allDatas.map(item => item.date);
+    var turbine = {{{ json turbine }}}
+
+    //Xác định ngày hôm nay và lựa chọn dữ liệu
+    const today = new Date().toLocaleDateString("en-GB");
+
+    const options = document.getElementById("customSelect").options;
+    let selectedIndex = -1;
+    for (let i = 0; i < options.length; i++) {
+        const optionDate = options[i].value;
+        if (optionDate === today) {
+            options[i].selected = true;
+            selectedIndex = i;
+            datas = allDatas[selectedIndex];
+            break;
+        }
+    }
+
+    var avg_temperatures = [];
+    allDatas.forEach((datas) => avg_temperatures.push(datas.avg_temperature.toFixed(2))
+    )
+    var avg_pressures = [];
+    allDatas.forEach((datas) => avg_pressures.push(datas.avg_pressure.toFixed(2))
+    )
+    var avg_windspeeds = [];
+    allDatas.forEach((datas) => avg_windspeeds.push(datas.avg_wind_speed.toFixed(2))
+    )
+    var avg_performances = [];
+    allDatas.forEach((datas) => avg_performances.push(datas.avg_power_output.toFixed(2))
+    )
+
+
+</script>
+<script src="/js/dashboard.js"></script>
+<script src="/js/header.js"></script>
+{{>scripts}}
