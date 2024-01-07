@@ -34,7 +34,7 @@
 
 # Configure EMQX
 
-<img src="blob:https://www.facebook.com/ee49308f-b60c-4ffd-9305-688b087d7448" width=300 />
-<img src="blob:https://www.facebook.com/eb935b0d-fa66-47aa-a553-4da34d12e924" width=300 /> 
-<img src="blob:https://www.facebook.com/bc00ab03-10a3-4e2a-9219-a568a49fcb8c" width=300 />
-<img src="blob:https://www.facebook.com/256aa121-bba5-4308-81ac-2c0dce638179" width=300 />
+<img src="./img/img1.png" width=300 />
+<img src="./img/img2.png" width=300 />
+<img src="./img/img3.png" width=300 />
+<img src="./img/img4png" width=300 />
